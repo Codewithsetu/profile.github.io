@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setu Kumar | SDET Growth Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ====================================================================
+           1. REFINED COLOR PALETTE & TYPOGRAPHY (CSS)
+           ==================================================================== */
+        :root {
+            /* DEFAULT: PROFESSIONAL LIGHT THEME (User Request) */
+            --bg-color: #ffffff; /* Crisp White */
+            --text-color: #333333; /* Dark Grey for contrast */
+            --primary-color: #1e40af; /* Deep Blue (Accent) */
+            --secondary-color: #4b5563; /* Subtle Grey for body text */
+            --card-bg: #f3f4f6; /* Light Grey Card Background */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        /* Dark Theme Toggled Class */
+        body.dark-theme {
+            --bg-color: #0f172a; /* Deep Slate Blue */
+            --text-color: #f8fafc; /* Near White */
+            --primary-color: #3b82f6; /* Bright Tech Blue (Accent) */
+            --secondary-color: #94a3b8; /* Subtle Grey */
+            --card-bg: #1e293b; /* Darker Slate */
+            --shadow-color: rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            transition: all var(--transition-speed) ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        section {
+            padding: 60px 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 0.5em;
+        }
+        
+        h1 { font-size: 3em; font-weight: 700; }
+        h2 { font-size: 2em; font-weight: 700; border-bottom: 2px solid var(--card-bg); padding-bottom: 10px; margin-bottom: 25px;}
+        h3 { font-size: 1.25em; font-weight: 500;}
+        
+        p { color: var(--text-color); margin-bottom: 1em; } 
+
+        /* Links */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Buttons/CTAs */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--card-bg); 
+            padding: 12px 30px;
+            border-radius: 8px;
+            margin-top: 25px; /* Used for Hero button */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+        
+        /* General button hover state */
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+            text-decoration: none;
+        }
+
+        /* Header/Navigation */
+        header {
+            background-color: var(--card-bg);
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        nav {
+            flex-grow: 1; 
+            text-align: center;
+            display: none; 
+        }
+        nav a {
+            margin: 0 18px; 
+            color: var(--text-color);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 0; 
+            border-bottom: 2px solid transparent;
+        }
+        nav a:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color); 
+            text-decoration: none;
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            cursor: pointer;
+            background: var(--primary-color);
+            color: var(--card-bg); 
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin-left: 20px;
+            font-weight: 600;
+            flex-shrink: 0; 
+        }
+        
+        /* Specific styling for the Consultation CTA in the header */
+        .consult-cta {
+            background-color: transparent !important;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color) !important;
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-weight: 700;
+            margin-left: 10px;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+        .consult-cta:hover {
+            background-color: var(--primary-color) !important;
+            color: var(--card-bg) !important;
+            border-color: var(--primary-color);
+        }
+
+        /* Hero Section Styling */
+        #hero {
+            text-align: center;
+            padding: 100px 25px;
+            background: var(--bg-color);
+        }
+        /* Style for the dynamic typed text */
+        #dynamic-text {
+            color: var(--primary-color);
+            font-weight: 900;
+            border-right: 3px solid var(--primary-color);
+            animation: blink-cursor 0.75s step-end infinite;
+            display: inline-block;
+        }
+        #hero p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 20px auto 0;
+            color: var(--secondary-color);
+        }
+
+        /* Project & Blog Card Styling */
+        .project-card, .blog-post {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            margin-bottom: 25px;
+            transform: translateY(30px); 
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .project-card:hover, .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+        .project-card h3, .blog-post h3 {
+            margin-top: 0;
+        }
+        .project-card .role, .blog-post .category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .project-card ul {
+            padding-left: 20px;
+            margin-top: 15px;
+            color: var(--text-color);
+            list-style: disc;
+        }
+        .project-card li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .blog-post p {
+            color: var(--secondary-color);
+        }
+
+        /* Grid Layouts for Projects and Blog */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Skills Section */
+        #skills {
+            background-color: var(--card-bg);
+        }
+        #skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        #skills li {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.9em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Consultation Section Styling */
+        #consultation {
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 80px 25px;
+            margin-top: 40px;
+        }
+        #consultation h2 {
+            border-bottom: none;
+            margin-bottom: 15px;
+        }
+        #consultation p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+            color: var(--secondary-color);
+        }
+        .consultation-buttons {
+            /* Removed unnecessary flex properties */
+            text-align: center;
+            margin-top: 25px;
+        }
+        /* Adjust the single button inside the consultation section to not need extra margin */
+        #consultation .cta-button {
+            margin-top: 0; 
+        }
+
+
+        /* Footer & Contact Info */
+        footer {
+            background-color: var(--card-bg);
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--card-bg);
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+        footer .contact-info {
+            margin: 15px 0;
+            line-height: 2;
+        }
+        footer a {
+            color: var(--primary-color);
+        }
+
+        /* State for Scroll-In Animation (When element is visible) */
+        .scrolled-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* ====================================================================
+           2. RESPONSIVE BREAKPOINTS
+           ==================================================================== */
+
+        /* Tablet/Desktop View */
+        @media (min-width: 768px) {
+            h1 { font-size: 4em; }
+            
+            nav {
+                display: block; 
+            }
+            /* Adjust spacing for Consultation button on wider screens */
+            .consult-cta {
+                margin-left: 30px; 
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            }
+        }
+
+        /* ====================================================================
+           3. CSS ANIMATIONS
+           ==================================================================== */
+
+        /* Blinking Cursor for Typing Effect */
+        @keyframes blink-cursor {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color); }
+        }
+    </style>
+</head>
+<body class="light-theme">
+
+    <header>
+        <div class="logo">S K.SDET</div>
+        <nav>
+            <a href="#hero">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#blog">Blog</a>
+            <a href="#consultation" class="consult-cta">Consultation</a>
+        </nav>
+        <button id="theme-toggle">🌑 Dark Mode</button>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Hello, I'm Setu Kumar, a <span id="dynamic-text"></span></h1>
+            <p>
+                A **results-driven SDET with 3 years of experience** in building robust automation frameworks for high-quality software, specializing in Java, API Automation, and Mobile Testing.
+            </p>
+            <a href="#projects" class="cta-button">View Professional Projects</a>
+        </section>
+
+        <section id="projects">
+            <h2>Professional Projects & Experience</h2>
+            <div class="grid-container" id="projects-container">
+                </div>
+        </section>
+
+        <section id="skills">
+            <h2>Core SDET Technical Stack</h2>
+            <ul>
+                <li>Java (Backend)</li>
+                <li>Angular (Frontend)</li>
+                <li>Manual Testing </li>
+                <li>Functional & Regression QA </li>
+                <li>API Automation (Rest Assured)</li>
+                <li>Mobile Testing (Android)</li>
+                <li>Functional & Regression QA</li>
+                <li>Database (SQL/DBMS)</li>
+                <li>Bug Tracking (Buganizer)</li>
+                <li>HTML/CSS/JS/Bootstrap</li>
+                <li>Database (SQL/DBMS)</li>
+                <li>Prompt writing(AI/Testing)</li>
+            </ul>
+        </section>
+
+        <section id="blog">
+            <h2>Latest Automation & Career Growth Insights</h2>
+            <div class="grid-container" id="posts-container">
+                </div>
+        </section>
+        
+        <section id="consultation">
+            <h2>Book Me for SDET Consultation</h2>
+            <p>
+                Need expert advice on Java/API automation, mobile testing strategies, or setting up robust QA processes? 
+                Connect with me directly on LinkedIn to discuss your consultation needs.
+            </p>
+            
+            <div class="consultation-buttons">
+                <a href="https://l1nk.dev/hLVdy" target="_blank" class="cta-button">
+                    Connect on LinkedIn
+                </a>
+            </div>
+
+            <p style="margin-top: 25px; font-size: 0.9em;">
+                *I monitor LinkedIn regularly and will respond within 24 hours to schedule a time.*
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="contact-info">
+            <p>
+                **Email:** <a href="mailto:setuk1998@gmail.com">setuk1998@gmail.com</a> |
+                **Mobile:** <a href="tel:+919341611545">+919341611545</a>
+            </p>
+            <p>
+                **LinkedIn:** <a href="https://l1nk.dev/hLVdy" target="_blank">linkedin.com/in/SetuKumar</a>
+            </p>
+        </div>
+        <p>Designed and Built by Setu Kumar &copy; 2025</p>
+    </footer>
+
+    <script>
+        // ====================================================================
+        // 1. DYNAMIC CONTENT DATA (JS)
+        // ====================================================================
+        
+        const typedTextOptions = [
+            "Software Development Engineer in Test (SDET).",
+            "Java & Angular Automation Expert.",
+            "Rest Assured API Automation Specialist.",
+            "Mobile Testing Enthusiast."
+        ];
+
+        const projectsData = [
+            {
+                title: "Namaste India – Google Project",
+                role: "Mobile/Android SDET",
+                responsibilities: [
+                    "Conducted **mobile testing and Android testing** for devices running Android 16 or below.",
+                    "Authored detailed **test plans** to cover all aspects of mobile application functionality and user experience.",
+                    "Created and managed **bug reports using Buganizer**, ensuring clear communication and tracking of issues.",
+                    "Collaborated with the development team to troubleshoot and resolve mobile-specific bugs."
+                ]
+            },
+            {
+                title: "QA Engineer – ECS American Airlines Project",
+                role: "API Automation & Full-Stack QA",
+                responsibilities: [
+                    "Designed, developed, and executed **end-to-end API test cases** to validate backend service functionality, performance, and integration points.",
+                    "Validated **RESTful APIs** for seamless communication between frontend and backend systems, focusing on data accuracy and system behavior.",
+                    "Performed **UI testing** to ensure frontend components were functioning as expected and aligned with user requirements.",
+                    "Maintained backend services for the American Airlines ECS project, ensuring high availability, scalability, and performance.",
+                    "Provided technical support and troubleshooting, resolving backend issues to enhance operational uptime and user experience.",
+                    "Collaborated with cross-functional teams to analyze system requirements and ensure comprehensive test coverage."
+                ]
+            }
+        ];
+
+        const postsData = [
+            { 
+                title: "Building a Rest Assured Framework from Scratch", 
+                snippet: "A deep dive into setting up a powerful API automation suite using Rest Assured and Java for robust backend testing.",
+                category: "API Automation"
+            },
+            { 
+                title: "Advanced Angular Component Testing: Best Practices", 
+                snippet: "Strategies for effective unit and integration testing of complex Angular components using Karma and Jasmine.",
+                category: "Frontend QA"
+            },
+            { 
+                title: "Effective Bug Tracking: Mastering Buganizer for Mobile Defects", 
+                snippet: "My proven approach to writing clear, reproducible bug reports that speed up resolution time.",
+                category: "QA Practices"
+            },
+            { 
+                title: "Career Growth: The Leap from Manual QA to Full-Stack SDET", 
+                snippet: "A practical guide on how to transition roles, focusing on essential skills like Java, Selenium, and design patterns.",
+                category: "Career Growth"
+            }
+        ];
+
+        // ====================================================================
+        // 2. CORE FUNCTIONS (JS)
+        // ====================================================================
+
+        // Function to create the dynamic typing effect
+        function startTypingEffect(elementId, phrases) {
+            const element = document.getElementById(elementId);
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                const displayText = isDeleting 
+                    ? currentPhrase.substring(0, charIndex - 1) 
+                    : currentPhrase.substring(0, charIndex + 1);
+
+                element.textContent = displayText;
+
+                const speed = isDeleting ? 50 : 100;
+                const delay = isDeleting ? 0 : 1500; 
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    setTimeout(() => isDeleting = true, delay);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(type, 500);
+                    return;
+                }
+
+                if (isDeleting) {
+                    charIndex--;
+                } else {
+                    charIndex++;
+                }
+                
+                setTimeout(type, speed);
+            }
+            type();
+        }
+
+        // Function to dynamically render the project cards
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            projectsData.forEach(project => {
+                const responsibilitiesList = project.responsibilities.map(resp => `<li>${resp}</li>`).join('');
+                
+                const projectElement = document.createElement('article');
+                projectElement.classList.add('project-card');
+                projectElement.innerHTML = `
+                    <span class="role">${project.role}</span>
+                    <h3>${project.title}</h3>
+                    <h4>Key Responsibilities:</h4>
+                    <ul>${responsibilitiesList}</ul>
+                `;
+                container.appendChild(projectElement);
+            });
+        }
+
+        // Function to dynamically render the blog posts
+        function renderBlogPosts() {
+            const container = document.getElementById('posts-container');
+            postsData.forEach(post => {
+                const postElement = document.createElement('article');
+                postElement.classList.add('blog-post');
+                postElement.innerHTML = `
+                    <span class="category">${post.category}</span>
+                    <h3>${post.title}</h3>
+                    <p>${post.snippet}</p>
+                    <a href="#">Read More &rarr;</a>
+                `;
+                container.appendChild(postElement);
+            });
+        }
+
+        // Function to handle the theme toggle
+        function setupThemeToggle() {
+            const toggleButton = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            toggleButton.addEventListener('click', () => {
+                // Toggle the dark-theme class
+                body.classList.toggle('dark-theme');
+                
+                // Update button text and icon
+                if (body.classList.contains('dark-theme')) {
+                    toggleButton.innerHTML = '☀️ Light Mode';
+                } else {
+                    toggleButton.innerHTML = '🌑 Dark Mode';
+                }
+            });
+        }
+
+        // Function to set up the professional Scroll-In Animation (Intersection Observer)
+        function setupScrollAnimation() {
+            const elementsToAnimate = document.querySelectorAll('.project-card, .blog-post');
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('scrolled-in');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.2
+            });
+
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // ====================================================================
+        // 3. INITIALIZATION (JS)
+        // ====================================================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Generate Content
+            renderProjects();
+            renderBlogPosts();
+
+            // 2. Set up Dynamic Features
+            startTypingEffect('dynamic-text', typedTextOptions);
+            setupThemeToggle();
+            setupScrollAnimation();
+        });
+    </script>
+</body>
+</html>
